@@ -34,7 +34,7 @@
       </div>
     </div>
 <div id="blue" style="min-height:50px" style="text-align:left">
-	<h3 style="">Students</h3>			
+	<h3 style="">Students</h3>
 	</div>
 
 
@@ -45,7 +45,6 @@
 <form action="students.php" role="form" method="POST">
 <div class="form-group">
 <center><label for="InputName1" style="font-size:24px">CWID</label><BR>
-</center><?php echo $cwidErr;?><BR><center>
 <input type="text" class="form-control" name="id" placeholder="Campus-Wide ID" value="<?php echo $cwid;?>"><span class="error" style="color:red">*</span>
 <BR><input type="submit" class="btn btn-theme" name="cwid_but" value="Submit"> </center>
 </div>
@@ -54,7 +53,6 @@
 <form action="students.php" role="form" method="POST">
 <div class="form-group">
 <center><label for="InputName2" style="font-size:24px">Course Number</label><BR>
-</center><?php echo $cnumErr;?><BR></center>
 <center><input type="text" class="form-control" name="course" placeholder="Course Number"  value="<?php echo $cnum;?>"><span class="error" style="color:red">*</span>
 <BR><input type="submit" class="btn btn-theme" name="course_but" value="Submit"> </center>
 </div>
@@ -73,16 +71,14 @@ function test_input($data)
 }
 
 
-$cwidErr = $cnumErr = "";
-$cwid = $cnum = "";
 
   if (isset($_POST["cwid_but"]) && empty($_POST["id"])){
-    $cwidErr = "CWID is required";
+    echo "<font color=red>CWID is required</font>";
   }
   elseif(isset($_POST["cwid_but"]) && !empty($_POST["id"])){
     $cwid = test_input($_POST["id"]);
     if (!preg_match("/^[0-9 ]*$/",$cwid)) {
-      $cwidErr = "Only numbers allowed"; 
+      echo "<font color=red>Only numbers allowed for CWID</font>";
     }
     else{
 	$servername = "ecsmysql";
@@ -95,7 +91,7 @@ $cwid = $cnum = "";
 	// Check connection
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
-	} 
+	}
 	$sql = "SELECT  R.cwid, R.cnum, C.cnum, R.grade, C.title FROM Record R, Course C WHERE R.cwid = $cwid AND R.cnum = C.cnum";
 	$result = mysqli_query($conn, $sql);
 		echo "<div class='col-xs-12' style='right:15px'><small><h2 style='text-align:left'><BR><BR>Results for CWID ". $cwid .":</small></h2></div>";
@@ -107,7 +103,7 @@ $cwid = $cnum = "";
 		echo "<tbody><tr><td>". $row["title"] . "</td><td>". $row["grade"] . "</td></tr>";
 		}
 		echo "</table>";
-	} 
+	}
 	else {
 	    echo "<div class='col-xs-6'><p style='text-align:right'><BR><BR>No results found</p></div>";
 	}
@@ -116,12 +112,12 @@ mysqli_close($conn);
 }
 
   if (isset($_POST["course_but"]) && empty($_POST["course"])){
-    $cnumErr = "Course Number is required";
+    echo "<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><font color=red>Course Number is required</font>";
   }
   elseif(isset($_POST["course_but"]) && !empty($_POST["course"])){
     $cnum = test_input($_POST["course"]);
     if (!preg_match("/^[0-9 ]*$/",$cnum)) {
-      $cnumErr = "Only numbers allowed"; 
+      echo "<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><font color=red>Only numbers allowed for Course Number</font>";
     }
     else{
 	$servername = "ecsmysql";
@@ -134,8 +130,8 @@ mysqli_close($conn);
 	// Check connection
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
-	} 
-	$sql = "SELECT C.cnum, S.cnum, S.snum, C.title, S.room, S.meeting, S.beg_time, S.end_time, S.num_seats FROM Course C, Section S WHERE C.cnum = $cnum AND C.cnum = S.cnum";
+	}
+	$sql = "SELECT C.cnum, S.cnum, S.snum, C.title, S.room, S.meeting, S.beg_time, S.end_time, R.cnum, R.snum, COUNT(R.snum) FROM Course C, Section S, Record R WHERE C.cnum = $cnum AND C.cnum = S.cnum AND R.cnum=S.cnum AND R.snum = S.snum GROUP BY (R.snum)";
 	$result = mysqli_query($conn, $sql);
 	echo "<div class='col-xs-12' style='right:15px'><small><h2 style='text-align:left'><BR><BR>Results for Course ". $cnum .":</small></h2></div>";
 	if (mysqli_num_rows($result) > 0) {
@@ -145,15 +141,15 @@ mysqli_close($conn);
 	    while($row = mysqli_fetch_assoc($result)) {
 		$btime = date('g:ia', strtotime($row["beg_time"]));
 		$etime = date('g:ia', strtotime($row["end_time"]));
-	        echo "<tbody><tr><td>". $row["snum"] ."</td><td>". $row["room"] . "</td><td>". $row["meeting"] . "</td><td>". $btime . "</td><td>". $etime . "</td><td>". $row["num_seats"] . "</td></tr>";
+	        echo "<tbody><tr><td>". $row["snum"] ."</td><td>". $row["room"] . "</td><td>". $row["meeting"] . "</td><td>". $btime . "</td><td>". $etime . "</td><td>". $row["COUNT(R.snum)"] . "</td></tr>";
 		}
 		echo "</table>";
-	} 
+	}
 	else {
 	    echo "<div class='col-xs-6'><p style='text-align:right'><BR><BR>No results found</p></div>";
 	}
-    }
 mysqli_close($conn);
+    }
 }
 
 ?>

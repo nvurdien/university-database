@@ -34,7 +34,7 @@
       </div>
     </div>
 <div id="blue" style="min-height:50px" style="text-align:left">
-	<h3 style="">Professors</h3>			
+	<h3 style="">Professors</h3>
 	</div>
 
 
@@ -80,16 +80,13 @@ function test_input($data)
 }
 //var_dump($_POST);
 
-$cnumErr = $ssnErr = "";
-$cnum = $snum = $ssn = "";
-
   if (isset($_POST["ssn_but"]) && empty($_POST["sn"])){
-    $ssnErr = "SSN is required";
+    echo "<font color=red>SSN is required</font>";
   }
   elseif(isset($_POST["ssn_but"]) && !empty($_POST["sn"])){
     $ssn = test_input($_POST["sn"]);
     if (!preg_match("/^[0-9 ]*$/",$ssn)) {
-      $ssnErr = "Only numbers allowed"; 
+      echo "<font color=red>Only numbers allowed for SSN</font>";
     }
     else{
 	$servername = "ecsmysql";
@@ -102,7 +99,7 @@ $cnum = $snum = $ssn = "";
 	// Check connection
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
-	} 
+	}
 //SELECT C.cnum, S.cnum, C.title, S.room, S.meeting, S.beg_time, S.end_time, S.pssn FROM Professor P, Section S, Course C WHERE P.ssn = $ssn AND S.pssn = P.ssn AND C.cnum = S.cnum
 //;
 	$sql = "SELECT C.cnum, S.cnum, C.title, S.room, S.meeting, S.beg_time, S.end_time, S.pssn FROM Professor P, Section S, Course C WHERE P.ssn = $ssn AND S.pssn = P.ssn AND C.cnum = S.cnum";
@@ -118,7 +115,7 @@ $cnum = $snum = $ssn = "";
 		echo "<tbody><tr><td>"  . $row["title"] . "</td><td>" . $row["room"] . "</td><td>" . $row["meeting"] . "</td><td>" . $btime . "</td><td>" . $etime . "</td></tr>";
 	}
 	echo "</table>";
-	} 
+	}
 	else {
 	    echo "<div class='col-xs-6'><p style='text-align:right'><BR><BR>No results found</p></div>";
 	}
@@ -128,13 +125,13 @@ mysqli_close($conn);
 }
 
   if (isset($_POST["cosec_but"]) && (empty($_POST["course"]) || empty($_POST["section"]))){
-    $cnumErr = "Course & Section Number is required";
+    echo "<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><font color=red>Course & Section Number are required</font>";
   }
   elseif(isset($_POST["cosec_but"]) && !empty($_POST["course"]) && !empty($_POST["section"])){
     $cnum = $_POST["course"];
     $snum = $_POST["section"];
     if (!preg_match("/^[0-9 ]*$/",$cnum) && !preg_match("/^[0-9 ]*$/",$snum)) {
-      $cnumErr = "Only numbers allowed"; 
+      echo "<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><font color=red>Only numbers allowed for Course & Section Number</font>";
     }
     else{
 	$servername = "ecsmysql";
@@ -147,7 +144,7 @@ mysqli_close($conn);
 	// Check connection
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
-	} 
+	}
 	$sql = "SELECT R.grade, R.cnum, R.snum, S.cnum, S.snum, COUNT(R.grade) FROM Section S, Record R WHERE R.cnum = $cnum AND R.snum = $snum AND S.snum = R.snum AND S.cnum = R.cnum GROUP BY (R.grade)";
 	$result = mysqli_query($conn, $sql);
 	echo "<div class='col-xs-12' style='right:15px'><small><h2 style='text-align:left'><BR><BR>Results for Course ". $cnum ." - 0". $snum .":</small></h2></div>";
@@ -159,7 +156,7 @@ mysqli_close($conn);
 		echo "<tbody><tr><td>". $row["grade"] . "</td><td>". $row["COUNT(R.grade)"] . "</td></tr>";
 	    }
 		echo "</table>";
-	} 
+	}
 	else {
 	    echo "<div class='col-xs-6'><p style='text-align:right'><BR><BR>No results found</p></div>";
 	}
