@@ -8,7 +8,7 @@ With the SSN you can view the classes the professor teaches along with the room,
 
 When inputting a course number and section number you can view how many students got an A, A-, ... etc in the course
 
-#Student
+# Student
 With the CWID you can view the list of courses the student took as well as the grades in those courses
 
 With the course number you can view the sections with the classrooms, meeting days, and the times of the class as well as the number of students enrolled in the course.
