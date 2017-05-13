@@ -12,3 +12,8 @@ When inputting a course number and section number you can view how many students
 With the CWID you can view the list of courses the student took as well as the grades in those courses
 
 With the course number you can view the sections with the classrooms, meeting days, and the times of the class as well as the number of students enrolled in the course.
+
+# Databases
+If you go to /databases.php or open the databases php file it will show all the databases included in our MYSQL.
+
+This will help when you are testing input and output on our site!
