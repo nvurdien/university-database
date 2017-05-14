@@ -45,7 +45,7 @@
 <form action="students.php" role="form" method="POST">
 <div class="form-group">
 <center><label for="InputName1" style="font-size:24px">CWID</label><BR>
-<input type="text" class="form-control" name="id" placeholder="Campus-Wide ID" value="<?php echo $cwid;?>"><span class="error" style="color:red">*</span>
+<input type="text" class="form-control" name="id" placeholder="Campus-Wide ID" value="<?php echo $cwid;?>" required><span class="error" style="color:red">*</span>
 <BR><input type="submit" class="btn btn-theme" name="cwid_but" value="Submit"> </center>
 </div>
 </form>
@@ -53,7 +53,7 @@
 <form action="students.php" role="form" method="POST">
 <div class="form-group">
 <center><label for="InputName2" style="font-size:24px">Course Number</label><BR>
-<center><input type="text" class="form-control" name="course" placeholder="Course Number"  value="<?php echo $cnum;?>"><span class="error" style="color:red">*</span>
+<center><input type="text" class="form-control" name="course" placeholder="Course Number"  value="<?php echo $cnum;?>" required><span class="error" style="color:red">*</span>
 <BR><input type="submit" class="btn btn-theme" name="course_but" value="Submit"> </center>
 </div>
 </form>

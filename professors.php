@@ -48,7 +48,7 @@
 <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <div class="form-group">
 <center><label for="InputName1" style="font-size:24px">SSN</label><BR>
-<input type="text" class="form-control" placeholder="Social Security Number" name="sn" value="<?php echo $ssn;?>"><span class="error" style="color:red">* <?php echo $ssnErr;?></span>
+<input type="text" class="form-control" placeholder="Social Security Number" name="sn" value="<?php echo $ssn;?>" required><span class="error" style="color:red">* <?php echo $ssnErr;?></span>
 <BR><input type="submit" class="btn btn-theme" name="ssn_but" value="Submit"> </center>
 </div>
 </form>
@@ -57,11 +57,11 @@
 <center><h1 style="font-size:24px">Course and Section Number</h1></center>
 <div class="form-group" style="margin-left:100px">
 <label for="InputName2">Course Number</label><BR>
-<input type="text" class="form-control" placeholder="Course Number" name="course" value="<?php echo $cnum;?>"><span class="error" style="color:red">* <?php echo $cnumErr;?></span>
+<input type="text" class="form-control" placeholder="Course Number" name="course" value="<?php echo $cnum;?>" required><span class="error" style="color:red">* <?php echo $cnumErr;?></span>
 </div>
 <div class="form-group" style="margin-left:100px">
 <label for="InputName3">Section Number</label><BR>
-<input type="text" class="form-control" name="section" placeholder="Section Number" value="<?php echo $snum;?>"><span class="error" style="color:red">* <?php echo $snumErr;?></span>
+<input type="text" class="form-control" name="section" placeholder="Section Number" value="<?php echo $snum;?>" required><span class="error" style="color:red">* <?php echo $snumErr;?></span>
 <BR>
 </div>
 <center><input type="submit" class="btn btn-theme" name="cosec_but" value="Submit"> </center>
