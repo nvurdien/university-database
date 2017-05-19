@@ -1,0 +1,170 @@
+CREATE TABLE Professor(
+         ssn VARCHAR(9) PRIMARY KEY,
+         name VARCHAR(100),
+         street VARCHAR(50),
+         city VARCHAR(50),
+         state VARCHAR(2),
+         zip VARCHAR(5),
+         area_code VARCHAR(3),
+         7_digit VARCHAR(7),
+         sex CHAR (1),
+         title VARCHAR(50),
+         salary FLOAT(10)
+     );
+
+CREATE TABLE Department(
+    dnum VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(50),
+    telephone VARCHAR(10),
+    location VARCHAR(50),
+    chairssn VARCHAR(9),
+    FOREIGN KEY (chairssn) REFERENCES Professor (ssn)
+);
+
+CREATE TABLE Course(
+    cnum VARCHAR(10) PRIMARY KEY,
+    title VARCHAR(50),
+    textbook VARCHAR(50),
+    units INTEGER,
+    prereqnum VARCHAR(10),
+    FOREIGN KEY (prereqnum) REFERENCES Course(cnum)
+);
+
+CREATE TABLE Section(
+    snum VARCHAR(10),
+    cnum VARCHAR(10),
+    room VARCHAR(10),
+    meeting VARCHAR(7),
+    beg_time TIME,
+    end_time TIME,
+    num_seats INTEGER,
+    pssn VARCHAR(9),
+    PRIMARY KEY (snum,cnum),
+    FOREIGN KEY (cnum) REFERENCES Course(cnum),
+    FOREIGN KEY (pssn) REFERENCES Professor(ssn)
+);
+
+CREATE TABLE Student(
+    cwid VARCHAR(9) PRIMARY KEY,
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    address VARCHAR(50),
+    telephone VARCHAR(10),
+    dnum VARCHAR(10),
+    FOREIGN KEY (dnum) REFERENCES Department(dnum)
+);
+
+CREATE TABLE Record(
+    cwid VARCHAR(9),
+    cnum VARCHAR(10),
+    snum VARCHAR(10),
+    grade VARCHAR(10),
+    FOREIGN KEY (cwid) REFERENCES Student(cwid),
+    FOREIGN KEY (cnum) REFERENCES Course(cnum),
+    FOREIGN KEY (snum) REFERENCES Section(snum)
+);
+
+
+insert into Professor values (365869435, 'Joe Schmoe', '5318 Hill Avenue', 'Burbank', 'CA', 90623, 714, 2013208, 'M', 'Adjunct Professor', 20350.00);
+
+insert into Professor values (265489335, 'Louis Williams', '118 Rooster Drive', 'Orange', 'CA', 94320, 714, 1309208, 'M', 'CS Department Chair', 75350.00);
+
+insert into Professor values (165669035, 'Akira Kurusu', '2048 LeBlanc Street', 'San Gabriel', 'CA', 91775 ,626, 1039241, 'M', 'Engineering Department Chair', 705350.00);
+
+insert into Department values (1234, 'Computer Science', 6572783700, 'Computer Science Building', 265489335);
+
+insert into Department values (2345, 'Engineer', 6572785987, 'Engineering Building', 165669035);
+
+insert into Course values (332, 'Databases & Files', 'Database Structure', 3, 311, 1234);
+
+insert into Course values (353, 'Intro Computer Security', 'CompTIA Security', 3, 311, 1234);
+
+insert into Course values (102, 'Engineering Graphics', 'Engineering Graphics AutoCAD', 2, 101, 2345);
+
+insert into Course values (205, 'Digital Computation', 'Fundamentals of Machine Computing', 3, 102, 2345);
+
+insert into Section values (01, 332, 102, 'Mon/Wed', '10:00', '11:15', 35, 265489335);
+
+insert into Section values (02, 332, 102, 'Tue/Thu', '11:00', '12:15', 35, 265489335);
+
+insert into Section values (01, 353, 401, 'Mon/Wed', '14:00', '16:45', 25, 265489335);
+
+insert into Section values (02, 353, 401,'Tue/Thu', '7:00', '9:45', 25, 265489335);
+
+insert into Section values (01, 102, 201, 'Fri' , '9:00', '10:15', 30, 365869435);
+
+insert into Section values (02, 102, 110, 'Mon/Wed' , '14:00', '15:15', 30, 365869435);
+
+insert into Section values (01, 205, 104, 'Mon/Wed', '12:00', '1:30', 22, 165669035);
+
+insert into Section values (02, 205, 108, 'Fri' , '13:00', '14:15', 22, 165669035);
+
+insert into Student values (111111111, 'Dave', 'Castino', '1234 Memory Dr', '7149875462', '1234');
+
+insert into Student values (222222222, 'Lee', 'Ho', '743 Orange St', '7145214532', '1234');
+
+insert into Student values (333333333, 'Kelly', 'Vo', '477 LeMon Blvd', '7146263305', '1234');
+
+insert into Student values (444444444, 'Kija', 'Noose', '556 Placentia St', '7146269543', '1234');
+
+insert into Student values (555555555, 'Yusuke', 'Kitagawa', '424 Euclid St', '7146574152', '1234');
+
+insert into Student values (666666666, 'Akechi', 'Goro', '220 South Park', '7146575564', '2345');
+
+insert into Student values (777777777, 'Makoto', 'Naegi', '144 Science Ln', '7146578451', '2345');
+
+insert into Student values (888888888, 'Komaeda', 'Nagito', '2113 Harbor St', '7146263179', '2345');
+
+insert into Student values (999999999, 'Christian', 'Delgado', '2110 Achilles Dr', '7144878564', '2345');
+
+insert into Student values (889021453, 'Diana', 'Tran', '1650 Hollywood Blvd', '7148486522', '1234');
+
+insert into Record values (111111111, 332, 01, 'A+');
+
+insert into Record values (111111111, 353, 01, 'A');
+
+insert into Record values (111111111, 102, 01, 'B+');
+
+insert into Record values (222222222, 332, 02, 'B');
+
+insert into Record values (222222222, 353, 02, 'B');
+
+insert into Record values (222222222, 102, 01, 'C');
+
+insert into Record values (333333333, 332, 02, 'B');
+
+insert into Record values (333333333, 353, 01, 'B-');
+
+insert into Record values (333333333, 102, 02, 'C+');
+
+insert into Record values (444444444, 332, 01, 'A-');
+
+insert into Record values (444444444, 353, 02, 'C-');
+
+insert into Record values (444444444, 205, 01, 'A+');
+
+insert into Record values (555555555, 332, 02, 'B');
+
+insert into Record values (555555555, 353, 02, 'B-');
+
+insert into Record values (555555555, 205, 02, 'A');
+
+insert into Record values (666666666, 102, 02, 'A');
+
+insert into Record values (666666666, 205, 02, 'A');
+
+insert into Record values (777777777, 102, 01, 'B-');
+
+insert into Record values (777777777, 205, 01, 'B');
+
+insert into Record values (888888888, 102, 01, 'B-');
+
+insert into Record values (888888888, 205, 02, 'B');
+
+insert into Record values (999999999, 102, 01, 'A');
+
+insert into Record values (999999999, 205, 02, 'A');
+
+insert into Record values (889021453, 332, 01, 'A+');
+
+insert into Record values (889021453, 353, 02, 'A+');
