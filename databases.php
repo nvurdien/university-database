@@ -44,10 +44,10 @@
 
 <?php
 
-$servername = "ecsmysql";
-$username = "cs332s28";
-$password = "kohxeobe";
-$dbname = "cs332s28";
+$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "cs332s28";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

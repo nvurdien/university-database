@@ -26,7 +26,7 @@ CREATE TABLE Course(
     title VARCHAR(50),
     textbook VARCHAR(50),
     units INTEGER,
-    prereqnum VARCHAR(10),
+    prereqnum VARCHAR(10) NULLABLE,
     FOREIGN KEY (prereqnum) REFERENCES Course(cnum)
 );
 
@@ -75,13 +75,13 @@ insert into Department values (1234, 'Computer Science', 6572783700, 'Computer S
 
 insert into Department values (2345, 'Engineer', 6572785987, 'Engineering Building', 165669035);
 
-insert into Course values (332, 'Databases & Files', 'Database Structure', 3, 311, 1234);
+insert into Course values (332, 'Databases & Files', 'Database Structure', 3, NULL);
 
-insert into Course values (353, 'Intro Computer Security', 'CompTIA Security', 3, 311, 1234);
+insert into Course values (353, 'Intro Computer Security', 'CompTIA Security', 3, NULL);
 
-insert into Course values (102, 'Engineering Graphics', 'Engineering Graphics AutoCAD', 2, 101, 2345);
+insert into Course values (102, 'Engineering Graphics', 'Engineering Graphics AutoCAD', 2, 101);
 
-insert into Course values (205, 'Digital Computation', 'Fundamentals of Machine Computing', 3, 102, 2345);
+insert into Course values (205, 'Digital Computation', 'Fundamentals of Machine Computing', 3, NULL);
 
 insert into Section values (01, 332, 102, 'Mon/Wed', '10:00', '11:15', 35, 265489335);
 

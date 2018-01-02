@@ -89,9 +89,9 @@ function test_input($data)
       echo "<font color=red>Only numbers allowed for SSN</font>";
     }
     else{
-	$servername = "ecsmysql";
-	$username = "cs332s28";
-	$password = "kohxeobe";
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
 	$dbname = "cs332s28";
 
 	// Create connection
@@ -134,9 +134,9 @@ mysqli_close($conn);
       echo "<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><font color=red>Only numbers allowed for Course & Section Number</font>";
     }
     else{
-	$servername = "ecsmysql";
-	$username = "cs332s28";
-	$password = "kohxeobe";
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
 	$dbname = "cs332s28";
 
 	// Create connection

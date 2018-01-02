@@ -81,9 +81,9 @@ function test_input($data)
       echo "<font color=red>Only numbers allowed for CWID</font>";
     }
     else{
-	$servername = "ecsmysql";
-	$username = "cs332s28";
-	$password = "kohxeobe";
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
 	$dbname = "cs332s28";
 
 	// Create connection
@@ -120,9 +120,9 @@ mysqli_close($conn);
       echo "<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><font color=red>Only numbers allowed for Course Number</font>";
     }
     else{
-	$servername = "ecsmysql";
-	$username = "cs332s28";
-	$password = "kohxeobe";
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
 	$dbname = "cs332s28";
 
 	// Create connection
