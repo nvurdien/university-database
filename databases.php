@@ -44,13 +44,14 @@
 
 <?php
 
-$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "cs332s28";
+$servername = "sql3.freesqldatabase.com";
+	$username = "sql3213749";
+	$password = "t5g25MyWuY";
+	$dbname = "sql3213749";
+	$port = "3306";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname, $port);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
